@@ -12,13 +12,18 @@ import _Gorevli
 @app.route('/', methods=["GET"])
 def Base():
     return """
-        <div><a href="Bisiklet.html">Bisiklet</a></div>
-        <div><a href="Kisi.html">Kisi</a></div>
-        <div><a href="Istasyon.html">Istasyon</a></div>
-        <div><a href="Gorevli.html">Gorevli</a></div>
-        <div><a href="Zimmet.html">Zimmet</a></div>
-        <div><a href="Kiralama.html">Kiralama</a></div>
-        <div><a href="Ucret.html">Ucret</a></div> 
+        <link rel="stylesheet" href="bootstrap.min.css" />
+        <div class="container mt-3">
+            <div class="list-group">
+                <a href="Bisiklet.html" class="list-group-item list-group-item-action">Bisiklet</a>
+                <a href="Kisi.html" class="list-group-item list-group-item-action">Kisi</a>
+                <a href="Istasyon.html" class="list-group-item list-group-item-action">Istasyon</a>
+                <a href="Gorevli.html" class="list-group-item list-group-item-action">Gorevli</a>
+                <a href="Zimmet.html" class="list-group-item list-group-item-action">Zimmet</a>
+                <a href="Kiralama.html" class="list-group-item list-group-item-action">Kiralama</a>
+                <a href="Ucret.html" class="list-group-item list-group-item-action">Ucret</a>
+            </div>
+        </div>
     """
 
 @app.route('/<path:path>')
