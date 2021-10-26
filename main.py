@@ -12,16 +12,18 @@ import _Gorevli
 @app.route('/', methods=["GET"])
 def Base():
     return """
+        <title>Bisiklet Kiralama Sistemi</title>
         <link rel="stylesheet" href="bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <div class="container mt-3">
             <div class="list-group">
-                <a href="Bisiklet.html" class="list-group-item list-group-item-action">Bisiklet</a>
-                <a href="Kisi.html" class="list-group-item list-group-item-action">Kisi</a>
-                <a href="Istasyon.html" class="list-group-item list-group-item-action">Istasyon</a>
-                <a href="Gorevli.html" class="list-group-item list-group-item-action">Gorevli</a>
-                <a href="Zimmet.html" class="list-group-item list-group-item-action">Zimmet</a>
-                <a href="Kiralama.html" class="list-group-item list-group-item-action">Kiralama</a>
-                <a href="Ucret.html" class="list-group-item list-group-item-action">Ucret</a>
+                <a href="Bisiklet.html" class="list-group-item list-group-item-action"><i class="fas fa-bicycle"></i> Bisiklet</a>
+                <a href="Kisi.html" class="list-group-item list-group-item-action"><i class="fas fa-user-friends"></i> Kisi</a>
+                <a href="Istasyon.html" class="list-group-item list-group-item-action"><i class="fas fa-archway"></i> Istasyon</a>
+                <a href="Gorevli.html" class="list-group-item list-group-item-action"><i class="fas fa-ser-friends"></i> Gorevli</a>
+                <a href="Zimmet.html" class="list-group-item list-group-item-action"><i class="fas fa-history"></i> Zimmet</a>
+                <a href="Kiralama.html" class="list-group-item list-group-item-action"><i class="fas fa-clock"></i> Kiralama</a>
+                <a href="Ucret.html" class="list-group-item list-group-item-action"><i class="fas fa-coins"></i> Ucret</a>
             </div>
         </div>
     """
