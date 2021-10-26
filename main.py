@@ -3,11 +3,22 @@ from flask import Flask, jsonify, request, send_from_directory
 app = Flask(__name__)
 
 import _Bisiklet
-
+import _Zimmet
+import _Ucret
+import _Kisi
+import _Kiralama
+import _Istasyon
+import _Gorevli
 @app.route('/', methods=["GET"])
 def Base():
     return """
         <div><a href="Bisiklet.html">Bisiklet</a></div>
+        <div><a href="Kisi.html">Kisi</a></div>
+        <div><a href="Istasyon.html">Istasyon</a></div>
+        <div><a href="Gorevli.html">Gorevli</a></div>
+        <div><a href="Zimmet.html">Zimmet</a></div>
+        <div><a href="Kiralama.html">Kiralama</a></div>
+        <div><a href="Ucret.html">Ucret</a></div> 
     """
 
 @app.route('/<path:path>')

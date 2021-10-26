@@ -4,28 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bisiklet</title>
+    <title>Zimmet</title>
     <script src="jquery.min.js"></script>
     <link rel="stylesheet" href="bootstrap.min.css" />
   </head>
   <body>
     <div class="container">
       <div class="card mt-3">
-        <div class="card-header">Bisiklet Listesi</div>
+        <div class="card-header">Zimmet Listesi</div>
         <div class="card-body">
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th>Marka</th>
-                <th>Model</th>
-                <th>CipNo</th>
-                <th>TeminTarihi</th>
-                <th>DigerOzellikler</th>
+                <th>IstasyonID</th>
+                <th>BisikletID</th>
+                <th>IstasyonaGelisTarihi</th>
+                <th>IstasyonaGelisSaati</th>
+                <th>TeslimAlanGorevliID</th>
                 
                 <th>İşlemler</th>
+               
               </tr>
             </thead>
-            <tbody id="BisikletListesi"></tbody>
+            <tbody id="ZimmetListesi"></tbody>
           </table>
         </div>
       </div>
@@ -33,42 +34,43 @@
       <div class="row">
         <div class="col-md-6">
           <div class="card mt-3">
-            <div class="card-header">Bisiklet Ekle</div>
+            <div class="card-header">Zimmet Ekle</div>
             <div class="card-body">
               <div class="input-group mb-3">
-                <span class="input-group-text">Marka</span>
-                <input type="text" id="ekle_Marka" class="form-control" />
+                <span class="input-group-text">IstasyonID</span>
+                <input type="text" id="ekle_IstasyonID" class="form-control" />
               </div>
               <div class="input-group mb-3">
-                <span class="input-group-text">Model</span>
-                <input type="text" id="ekle_Model" class="form-control" />
+                <span class="input-group-text">BisikletID</span>
+                <input type="text" id="ekle_BisikletID" class="form-control" />
               </div>
               <div class="input-group mb-3">
-                <span class="input-group-text">CipNo</span>
-                <input type="text" id="ekle_CipNo" class="form-control" />
+                <span class="input-group-text">IstasyonaGelisTarihi</span>
+                <input type="text" id="ekle_IstasyonaGelisTarihi" class="form-control" />
               </div>
               <div class="input-group mb-3">
-                <span class="input-group-text">TeminTarihi</span>
+                <span class="input-group-text">IstasyonaGelisSaati</span>
                 <input
                   type="text"
-                  id="ekle_TeminTarihi"
+                  id="ekle_IstasyonaGelisSaati"
                   class="form-control"
                 />
               </div>
               <div class="input-group mb-3">
-                <span class="input-group-text">DigerOzellikler</span>
+                <span class="input-group-text">TeslimAlanGorevliID</span>
                 <input
                   type="text"
-                  id="ekle_DigerOzellikler"
+                  id="ekle_TeslimAlanGorevliID"
                   class="form-control"
                 />
               </div>
+            
             
 
               <button
                 type="button"
                 class="btn btn-dark"
-                onclick="BisikletAdd()"
+                onclick="ZimmetAdd()"
               >
                 Kaydet
               </button>
@@ -78,43 +80,44 @@
 
         <div class="col-md-6">
           <div class="card mt-3" id="guncelle" style="display: none">
-            <div class="card-header">Bisiklet Güncelle</div>
+            <div class="card-header">Zimmet Güncelle</div>
             <div class="card-body">
-              <input type="hidden" id="guncelle_BisikletID" />
+              <input type="hidden" id="guncelle_ZimmetID" />
               <div class="input-group mb-3">
-                <span class="input-group-text">Marka</span>
-                <input type="text" id="guncelle_Marka" class="form-control" />
+                <span class="input-group-text">IstasyonID</span>
+                <input type="text" id="guncelle_IstasyonID" class="form-control" />
               </div>
               <div class="input-group mb-3">
-                <span class="input-group-text">Model</span>
-                <input type="text" id="guncelle_Model" class="form-control" />
+                <span class="input-group-text">BisikletID</span>
+                <input type="text" id="guncelle_BisikletID" class="form-control" />
               </div>
               <div class="input-group mb-3">
-                <span class="input-group-text">CipNo</span>
-                <input type="text" id="guncelle_CipNo" class="form-control" />
+                <span class="input-group-text">IstasyonaGelisTarihi</span>
+                <input type="text" id="guncelle_IstasyonaGelisTarihi" class="form-control" />
               </div>
               <div class="input-group mb-3">
-                <span class="input-group-text">TeminTarihi</span>
+                <span class="input-group-text">IstasyonaGelisSaati</span>
                 <input
                   type="text"
-                  id="guncelle_TeminTarihi"
+                  id="guncelle_IstasyonaGelisSaati"
                   class="form-control"
                 />
               </div>
               <div class="input-group mb-3">
-                <span class="input-group-text">DigerOzellikler</span>
+                <span class="input-group-text">TeslimAlanGorevliID</span>
                 <input
                   type="text"
-                  id="guncelle_DigerOzellikler"
+                  id="guncelle_TeslimAlanGorevliID"
                   class="form-control"
                 />
               </div>
+              
 
 
               <button
                 type="button"
                 class="btn btn-dark"
-                onclick="BisikletSet()"
+                onclick="ZimmetSet()"
               >
                 Kaydet
               </button>
@@ -124,18 +127,18 @@
       </div>
     </div>
     <script>
-      function BisikletAdd() {
+      function ZimmetAdd() {
         data = JSON.stringify({
-          Marka: $("#ekle_Marka").val(),
-          Model: $("#ekle_Model").val(),
-          CipNo: $("#ekle_CipNo").val(),
-          TeminTarihi: $("#ekle_TeminTarihi").val(),
-          DigerOzellikler: $("#ekle_DigerOzellikler").val(),
+          IstasyonID: $("#ekle_IstasyonID").val(),
+          BisikletID: $("#ekle_BisikletID").val(),
+          IstasyonaGelisTarihi: $("#ekle_IstasyonaGelisTarihi").val(),
+          IstasyonaGelisSaati: $("#ekle_IstasyonaGelisSaati").val(),
+          TeslimAlanGorevliID: $("#ekle_TeslimAlanGorevliID").val(),
          
         });
         $.ajax({
           type: "POST",
-          url: "http://localhost:4040/Bisiklet",
+          url: "http://localhost:4040/Zimmet",
           data: data,
           success: function (res) {
             alert("Tamamlandı");
@@ -146,10 +149,10 @@
         });
       }
 
-      function BisikletDelete(id) {
+      function ZimmetDelete(id) {
         $.ajax({
           type: "DELETE",
-          url: "http://localhost:4040/Bisiklet/" + id,
+          url: "http://localhost:4040/Zimmet/" + id,
           success: function (res) {
             alert("Tamamlandı");
             window.top.location.href = window.top.location.href;
@@ -159,25 +162,25 @@
         });
       }
 
-      function BisikletGetAll() {
+      function ZimmetGetAll() {
         $.ajax({
           type: "GET",
-          url: "http://localhost:4040/Bisiklet",
+          url: "http://localhost:4040/Zimmet",
           success: function (res) {
             for (var i in res) {
               row = res[i];
-              $("#BisikletListesi").append(`
+              $("#ZimmetListesi").append(`
                 <tr>
-                    <td>${row.Marka}</td>
-                    <td>${row.Model}</td>
-                    <td>${row.CipNo}</td>
-                    <td>${row.TeminTarihi}</td>
-                    <td>${row.DigerOzellikler}</td>
-               
+                    <td>${row.IstasyonID}</td>
+                    <td>${row.BisikletID}</td>
+                    <td>${row.IstasyonaGelisTarihi}</td>
+                    <td>${row.IstasyonaGelisSaati}</td>
+                    <td>${row.TeslimAlanGorevliID}</td>
+                
 
                     <td>
-                        <button type="button" class="btn btn-primary btn-sm" onclick="BisikletGetById(${row.BisikletID})">Güncelle</button>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="BisikletDelete(${row.BisikletID})">Sil</button>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="ZimmetGetById(${row.ZimmetID})">Güncelle</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="ZimmetDelete(${row.ZimmetID})">Sil</button>
                     </td>
                 </tr>
             `);
@@ -188,38 +191,39 @@
         });
       }
 
-      function BisikletGetById(id) {
+      function ZimmetGetById(id) {
         $("#guncelle").fadeIn(1e3);
         $.ajax({
           type: "GET",
-          url: "http://localhost:4040/Bisiklet/" + id,
+          url: "http://localhost:4040/Zimmet/" + id,
           success: function (res) {
+            $("#guncelle_ZimmetID").val(res.ZimmetID);
+            $("#guncelle_IstasyonID").val(res.IstasyonID);
             $("#guncelle_BisikletID").val(res.BisikletID);
-            $("#guncelle_Marka").val(res.Marka);
-            $("#guncelle_Model").val(res.Model);
-            $("#guncelle_CipNo").val(res.CipNo);
-            $("#guncelle_TeminTarihi").val(res.TeminTarihi);
-            $("#guncelle_DigerOzellikler").val(res.DigerOzellikler);
-           
+            $("#guncelle_IstasyonaGelisTarihi").val(res.IstasyonaGelisTarihi);
+            $("#guncelle_IstasyonaGelisSaati").val(res.IstasyonaGelisSaati);
+            $("#guncelle_TeslimAlanGorevliID").val(res.TeslimAlanGorevliID);
+          
           },
           dataType: "json",
           contentType: "application/json",
         });
       }
 
-      function BisikletSet() {
+      function ZimmetSet() {
         data = JSON.stringify({
-         BisikletID: $("#guncelle_BisikletID").val(),
-          Marka: $("#guncelle_Marka").val(),
-          Model: $("#guncelle_Model").val(),
-          CipNo: $("#guncelle_CipNo").val(),
-          TeminTarihi: $("#guncelle_TeminTarihi").val(),
-          DigerOzellikler: $("#guncelle_DigerOzellikler").val(),
+         ZimmetID: $("#guncelle_ZimmetID").val(),
+          IstasyonID: $("#guncelle_IstasyonID").val(),
+          BisikletID: $("#guncelle_BisikletID").val(),
+          IstasyonaGelisTarihi: $("#guncelle_IstasyonaGelisTarihi").val(),
+          IstasyonaGelisSaati: $("#guncelle_IstasyonaGelisSaati").val(),
+          TeslimAlanGorevliID: $("#guncelle_TeslimAlanGorevliID").val(),
+         
         
         });
         $.ajax({
           type: "PUT",
-          url: "http://localhost:4040/Bisiklet",
+          url: "http://localhost:4040/Zimmet",
           data: data,
           success: function (res) {
             alert("Tamamlandı");
@@ -230,7 +234,7 @@
         });
       }
 
-      BisikletGetAll();
+      ZimmetGetAll();
     </script>
   </body>
 </html>

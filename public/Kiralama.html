@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kiralama</title>
+    <script src="jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card mt-3">
+        <div class="card-header">Kiralama Listesi</div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>KisiID</th>
+                <th>BisikletID</th>
+                <th>IstasyonID</th>
+                <th>TeslimTarihi</th>
+                <th>TeslimSaati</th>
+                <th>TeslimAlanGorevliID</th>
+                <th>IadeTarihi</th>
+                <th>IadeSaati</th>
+                <th>IadeEdilenIstasyonID</th>
+                <th>IadeEdilenGorevliID</th>
+                <th>KiralamaSuresi</th>
+                <th>KiraUcreti</th>
+                
+                
+                <th>İşlemler</th>
+              </tr>
+            </thead>
+            <tbody id="KiralamaListesi"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card mt-3">
+            <div class="card-header">Kiralama Ekle</div>
+            <div class="card-body">
+              <div class="input-group mb-3">
+                <span class="input-group-text">KisiID</span>
+                <input type="text" id="ekle_KisiID" class="form-control" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">BisikletID</span>
+                <input type="text" id="ekle_BisikletID" class="form-control" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">IstasyonID</span>
+                <input type="text" id="ekle_IstasyonID" class="form-control" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">TeslimTarihi</span>
+                <input
+                  type="text"
+                  id="ekle_TeslimTarihi"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">TeslimSaati</span>
+                <input
+                  type="text"
+                  id="ekle_TeslimSaati"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">TeslimAlanGorevliID</span>
+                <input
+                  type="text"
+                  id="ekle_TeslimAlanGorevliID"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">IadeTarihi</span>
+                <input
+                  type="text"
+                  id="ekle_IadeTarihi"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">IadeSaati</span>
+                <input
+                  type="text"
+                  id="ekle_IadeSaati"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">IadeEdilenIstasyonID</span>
+                <input
+                  type="text"
+                  id="ekle_IadeEdilenIstasyonID"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">IadeEdilenGorevliID</span>
+                <input
+                  type="text"
+                  id="ekle_IadeEdilenGorevliID"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">KiralamaSuresi</span>
+                <input
+                  type="text"
+                  id="ekle_KiralamaSuresi"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">KiraUcreti</span>
+                <input
+                  type="text"
+                  id="ekle_KiraUcreti"
+                  class="form-control"
+                />
+              </div>
+            
+
+              <button
+                type="button"
+                class="btn btn-dark"
+                onclick="KiralamaAdd()"
+              >
+                Kaydet
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card mt-3" id="guncelle" style="display: none">
+            <div class="card-header">Kiralama Güncelle</div>
+            <div class="card-body">
+              <input type="hidden" id="guncelle_KiralamaID" />
+              <div class="input-group mb-3">
+                <span class="input-group-text">KisiID</span>
+                <input type="text" id="guncelle_KisiID" class="form-control" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">BisikletID</span>
+                <input type="text" id="guncelle_BisikletID" class="form-control" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">IstasyonID</span>
+                <input type="text" id="guncelle_IstasyonID" class="form-control" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">TeslimTarihi</span>
+                <input
+                  type="text"
+                  id="guncelle_TeslimTarihi"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">TeslimSaati</span>
+                <input
+                  type="text"
+                  id="guncelle_TeslimSaati"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">TeslimAlanGorevliID</span>
+                <input
+                  type="text"
+                  id="guncelle_TeslimAlanGorevliID"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">IadeTarihi</span>
+                <input
+                  type="text"
+                  id="guncelle_IadeTarihi"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">IadeSaati</span>
+                <input
+                  type="text"
+                  id="guncelle_IadeSaati"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">IadeEdilenIstasyonID</span>
+                <input
+                  type="text"
+                  id="guncelle_IadeEdilenIstasyonID"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">IadeEdilenGorevliID</span>
+                <input
+                  type="text"
+                  id="guncelle_IadeEdilenGorevliID"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">KiralamaSuresi</span>
+                <input
+                  type="text"
+                  id="guncelle_KiralamaSuresi"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">KiraUcreti</span>
+                <input
+                  type="text"
+                  id="guncelle_KiraUcreti"
+                  class="form-control"
+                />
+              </div>
+
+
+              <button
+                type="button"
+                class="btn btn-dark"
+                onclick="KiralamaSet()"
+              >
+                Kaydet
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function KiralamaAdd() {
+        data = JSON.stringify({
+          KisiID: $("#ekle_KisiID").val(),
+          BisikletID: $("#ekle_BisikletID").val(),
+          IstasyonID: $("#ekle_IstasyonID").val(),
+          TeslimTarihi: $("#ekle_TeslimTarihi").val(),
+          TeslimSaati: $("#ekle_TeslimSaati").val(),
+          TeslimAlanGorevliID: $("#ekle_TeslimAlanGorevliID").val(),
+          IadeTarihi: $("#ekle_IadeTarihi").val(),
+          IadeSaati: $("#ekle_IadeSaati").val(),
+          IadeEdilenIstasyonID: $("#ekle_IadeEdilenIstasyonID").val(),
+          IadeEdilenGorevliID: $("#ekle_IadeEdilenGorevliID").val(),
+          KiralamaSuresi: $("#ekle_KiralamaSuresi").val(),
+          KiraUcreti: $("#ekle_KiraUcreti").val(),
+         
+        });
+        $.ajax({
+          type: "POST",
+          url: "http://localhost:4040/Kiralama",
+          data: data,
+          success: function (res) {
+            alert("Tamamlandı");
+            window.top.location.href = window.top.location.href;
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function KiralamaDelete(id) {
+        $.ajax({
+          type: "DELETE",
+          url: "http://localhost:4040/Kiralama/" + id,
+          success: function (res) {
+            alert("Tamamlandı");
+            window.top.location.href = window.top.location.href;
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function KiralamaGetAll() {
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:4040/Kiralama",
+          success: function (res) {
+            for (var i in res) {
+              row = res[i];
+              $("#KiralamaListesi").append(`
+                <tr>
+                    <td>${row.KisiID}</td>
+                    <td>${row.BisikletID}</td>
+                    <td>${row.IstasyonID}</td>
+                    <td>${row.TeslimTarihi}</td>
+                    <td>${row.TeslimSaati}</td>
+                    <td>${row.TeslimAlanGorevliID}</td>
+                    <td>${row.IadeTarihi}</td>
+                    <td>${row.IadeSaati}</td>
+                    <td>${row.IadeEdilenIstasyonID }</td>
+                    <td>${row.IadeEdilenGorevliID}</td>
+                    <td>${row.KiralamaSuresi}</td>
+                    <td>${row.KiraUcreti}</td>
+
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="KiralamaGetById(${row.KiralamaID})">Güncelle</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="KiralamaDelete(${row.KiralamaID})">Sil</button>
+                    </td>
+                </tr>
+            `);
+            }
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function KiralamaGetById(id) {
+        $("#guncelle").fadeIn(1e3);
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:4040/Kiralama/" + id,
+          success: function (res) {
+            $("#guncelle_KiralamaID").val(res.KiralamaID);
+            $("#guncelle_KisiID").val(res.KisiID);
+            $("#guncelle_BisikletID").val(res.BisikletID);
+            $("#guncelle_IstasyonID").val(res.IstasyonID);
+            $("#guncelle_TeslimTarihi").val(res.TeslimTarihi);
+            $("#guncelle_TeslimSaati").val(res.TeslimSaati);
+            $("#guncelle_TeslimAlanGorevliID").val(res.TeslimAlanGorevliID);
+            $("#guncelle_IadeTarihi").val(res.IadeTarihi);
+            $("#guncelle_IadeSaati").val(res.IadeSaati);
+            $("#guncelle_IadeEdilenIstasyonID").val(res.IadeEdilenIstasyonID);
+            $("#guncelle_IadeEdilenGorevliID").val(res.IadeEdilenGorevliID);
+            $("#guncelle_KiralamaSuresi").val(res.KiralamaSuresi);
+            $("#guncelle_KiraUcreti").val(res.KiraUcreti);
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function KiralamaSet() {
+        data = JSON.stringify({
+         KiralamaID: $("#guncelle_KiralamaID").val(),
+          KisiID: $("#guncelle_KisiID").val(),
+          BisikletID: $("#guncelle_BisikletID").val(),
+          IstasyonID: $("#guncelle_IstasyonID").val(),
+          TeslimTarihi: $("#guncelle_TeslimTarihi").val(),
+          TeslimSaati: $("#guncelle_TeslimSaati").val(),
+          TeslimAlanGorevliID: $("#guncelle_TeslimAlanGorevliID").val(),
+          IadeTarihi: $("#guncelle_IadeTarihi").val(),
+          IadeSaati: $("#guncelle_IadeSaati").val(),
+          IadeEdilenIstasyonID: $("#guncelle_IadeEdilenIstasyonID").val(),
+          IadeEdilenGorevliID: $("#guncelle_IadeEdilenGorevliID").val(),
+          KiralamaSuresi: $("#guncelle_KiralamaSuresi").val(),
+          KiraUcreti: $("#guncelle_KiraUcreti").val(),
+        
+        });
+        $.ajax({
+          type: "PUT",
+          url: "http://localhost:4040/Kiralama",
+          data: data,
+          success: function (res) {
+            alert("Tamamlandı");
+            window.top.location.href = window.top.location.href;
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      KiralamaGetAll();
+    </script>
+  </body>
+</html>

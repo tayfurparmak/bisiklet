@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kisi</title>
+    <script src="jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card mt-3">
+        <div class="card-header">Kisi Listesi</div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>TcKimlikNo</th>
+                <th>Adi</th>
+                <th>Soyadi</th>
+                <th>BabaAdi</th>
+                <th>DogumYeri</th>
+                <th>DogumTarihi</th>
+                <th>IkahmetkahAdresi</th>
+                
+                <th>İşlemler</th>
+              </tr>
+            </thead>
+            <tbody id="KisiListesi"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card mt-3">
+            <div class="card-header">Kisi Ekle</div>
+            <div class="card-body">
+              <div class="input-group mb-3">
+                <span class="input-group-text">TcKimlikNo</span>
+                <input type="text" id="ekle_TcKimlikNo" class="form-control" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Adi</span>
+                <input type="text" id="ekle_Adi" class="form-control" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Soyadi</span>
+                <input type="text" id="ekle_Soyadi" class="form-control" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">BabaAdi</span>
+                <input
+                  type="text"
+                  id="ekle_BabaAdi"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">DogumYeri</span>
+                <input
+                  type="text"
+                  id="ekle_DogumYeri"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">DogumTarihi</span>
+                <input
+                  type="text"
+                  id="ekle_DogumTarihi"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">IkahmetkahAdresi</span>
+                <input
+                  type="text"
+                  id="ekle_IkahmetkahAdresi"
+                  class="form-control"
+                />
+              </div>
+            
+
+              <button
+                type="button"
+                class="btn btn-dark"
+                onclick="KisiAdd()"
+              >
+                Kaydet
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card mt-3" id="guncelle" style="display: none">
+            <div class="card-header">Kisi Güncelle</div>
+            <div class="card-body">
+              <input type="hidden" id="guncelle_KisiID" />
+              <div class="input-group mb-3">
+                <span class="input-group-text">TcKimlikNo</span>
+                <input type="text" id="guncelle_TcKimlikNo" class="form-control" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Adi</span>
+                <input type="text" id="guncelle_Adi" class="form-control" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Soyadi</span>
+                <input type="text" id="guncelle_Soyadi" class="form-control" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">BabaAdi</span>
+                <input
+                  type="text"
+                  id="guncelle_BabaAdi"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">DogumYeri</span>
+                <input
+                  type="text"
+                  id="guncelle_DogumYeri"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">DogumTarihi</span>
+                <input
+                  type="text"
+                  id="guncelle_DogumTarihi"
+                  class="form-control"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">IkahmetkahAdresi</span>
+                <input
+                  type="text"
+                  id="guncelle_IkahmetkahAdresi"
+                  class="form-control"
+                />
+              </div>
+
+
+              <button
+                type="button"
+                class="btn btn-dark"
+                onclick="KisiSet()"
+              >
+                Kaydet
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function KisiAdd() {
+        data = JSON.stringify({
+          TcKimlikNo: $("#ekle_TcKimlikNo").val(),
+          Adi: $("#ekle_Adi").val(),
+          Soyadi: $("#ekle_Soyadi").val(),
+          BabaAdi: $("#ekle_BabaAdi").val(),
+          DogumYeri: $("#ekle_DogumYeri").val(),
+          DogumTarihi: $("#ekle_DogumTarihi").val(),
+          IkahmetkahAdresi: $("#ekle_IkahmetkahAdresi").val(),
+         
+        });
+        $.ajax({
+          type: "POST",
+          url: "http://localhost:4040/Kisi",
+          data: data,
+          success: function (res) {
+            alert("Tamamlandı");
+            window.top.location.href = window.top.location.href;
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function KisiDelete(id) {
+        $.ajax({
+          type: "DELETE",
+          url: "http://localhost:4040/Kisi/" + id,
+          success: function (res) {
+            alert("Tamamlandı");
+            window.top.location.href = window.top.location.href;
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function KisiGetAll() {
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:4040/Kisi",
+          success: function (res) {
+            for (var i in res) {
+              row = res[i];
+              $("#KisiListesi").append(`
+                <tr>
+                    <td>${row.TcKimlikNo}</td>
+                    <td>${row.Adi}</td>
+                    <td>${row.Soyadi}</td>
+                    <td>${row.BabaAdi}</td>
+                    <td>${row.DogumYeri}</td>
+                    <td>${row.DogumTarihi}</td>
+                    <td>${row.IkahmetkahAdresi}</td>
+
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="KisiGetById(${row.KisiID})">Güncelle</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="KisiDelete(${row.KisiID})">Sil</button>
+                    </td>
+                </tr>
+            `);
+            }
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function KisiGetById(id) {
+        $("#guncelle").fadeIn(1e3);
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:4040/Kisi/" + id,
+          success: function (res) {
+            $("#guncelle_KisiID").val(res.KisiID);
+            $("#guncelle_TcKimlikNo").val(res.TcKimlikNo);
+            $("#guncelle_Adi").val(res.Adi);
+            $("#guncelle_Soyadi").val(res.Soyadi);
+            $("#guncelle_BabaAdi").val(res.BabaAdi);
+            $("#guncelle_DogumYeri").val(res.DogumYeri);
+            $("#guncelle_DogumTarihi").val(res.DogumTarihi);
+            $("#guncelle_IkahmetkahAdresi").val(res.IkahmetkahAdresi);
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function KisiSet() {
+        data = JSON.stringify({
+         KisiID: $("#guncelle_KisiID").val(),
+          TcKimlikNo: $("#guncelle_TcKimlikNo").val(),
+          Adi: $("#guncelle_Adi").val(),
+          Soyadi: $("#guncelle_Soyadi").val(),
+          BabaAdi: $("#guncelle_BabaAdi").val(),
+          DogumYeri: $("#guncelle_DogumYeri").val(),
+          DogumTarihi: $("#guncelle_DogumTarihi").val(),
+          IkahmetkahAdresi: $("#guncelle_IkahmetkahAdresi").val(),
+        
+        });
+        $.ajax({
+          type: "PUT",
+          url: "http://localhost:4040/Kisi",
+          data: data,
+          success: function (res) {
+            alert("Tamamlandı");
+            window.top.location.href = window.top.location.href;
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      KisiGetAll();
+    </script>
+  </body>
+</html>

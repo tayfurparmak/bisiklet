@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ucret</title>
+    <script src="jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card mt-3">
+        <div class="card-header">Ucret Listesi</div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>UcretBaslangicTarihi</th>
+                <th>SaatlikUcret</th>
+                
+                <th>İşlemler</th>
+               
+
+              </tr>
+            </thead>
+            <tbody id="UcretListesi"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card mt-3">
+            <div class="card-header">Ucret Ekle</div>
+            <div class="card-body">
+              <div class="input-group mb-3">
+                <span class="input-group-text">UcretBaslangicTarihi</span>
+                <input type="text" id="ekle_UcretBaslangicTarihi" class="form-control" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">SaatlikUcret</span>
+                <input type="text" id="ekle_SaatlikUcret" class="form-control" />
+              </div>
+            
+             
+            
+
+              <button
+                type="button"
+                class="btn btn-dark"
+                onclick="UcretAdd()"
+              >
+                Kaydet
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card mt-3" id="guncelle" style="display: none">
+            <div class="card-header">Ucret Güncelle</div>
+            <div class="card-body">
+              <input type="hidden" id="guncelle_UcretID" />
+              <div class="input-group mb-3">
+                <span class="input-group-text">UcretBaslangicTarihi</span>
+                <input type="text" id="guncelle_UcretBaslangicTarihi" class="form-control" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">SaatlikUcret</span>
+                <input type="text" id="guncelle_SaatlikUcret" class="form-control" />
+              </div>
+             
+            
+
+
+              <button
+                type="button"
+                class="btn btn-dark"
+                onclick="UcretSet()"
+              >
+                Kaydet
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function UcretAdd() {
+        data = JSON.stringify({
+          UcretBaslangicTarihi: $("#ekle_UcretBaslangicTarihi").val(),
+          SaatlikUcret: $("#ekle_SaatlikUcret").val(),
+        
+         
+        });
+        $.ajax({
+          type: "POST",
+          url: "http://localhost:4040/Ucret",
+          data: data,
+          success: function (res) {
+            alert("Tamamlandı");
+            window.top.location.href = window.top.location.href;
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function UcretDelete(id) {
+        $.ajax({
+          type: "DELETE",
+          url: "http://localhost:4040/Ucret/" + id,
+          success: function (res) {
+            alert("Tamamlandı");
+            window.top.location.href = window.top.location.href;
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function UcretGetAll() {
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:4040/Ucret",
+          success: function (res) {
+            for (var i in res) {
+              row = res[i];
+              $("#UcretListesi").append(`
+                <tr>
+                    <td>${row.UcretBaslangicTarihi}</td>
+                    <td>${row.SaatlikUcret}</td>
+                 
+               
+
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="UcretGetById(${row.UcretID})">Güncelle</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="UcretDelete(${row.UcretID})">Sil</button>
+                    </td>
+                </tr>
+            `);
+            }
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function UcretGetById(id) {
+        $("#guncelle").fadeIn(1e3);
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:4040/Ucret/" + id,
+          success: function (res) {
+            $("#guncelle_UcretID").val(res.UcretID);
+            $("#guncelle_UcretBaslangicTarihi").val(res.UcretBaslangicTarihi);
+            $("#guncelle_SaatlikUcret").val(res.SaatlikUcret);
+         
+           
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function UcretSet() {
+        data = JSON.stringify({
+         UcretID: $("#guncelle_UcretID").val(),
+          UcretBaslangicTarihi: $("#guncelle_UcretBaslangicTarihi").val(),
+          SaatlikUcret: $("#guncelle_SaatlikUcret").val(),
+        
+         
+        });
+        $.ajax({
+          type: "PUT",
+          url: "http://localhost:4040/Ucret",
+          data: data,
+          success: function (res) {
+            alert("Tamamlandı");
+            window.top.location.href = window.top.location.href;
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      UcretGetAll();
+    </script>
+  </body>
+</html>
