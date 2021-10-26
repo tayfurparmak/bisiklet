@@ -20,7 +20,7 @@ def Base():
                 <a href="Bisiklet.html" class="list-group-item list-group-item-action"><i class="fas fa-bicycle"></i> Bisiklet</a>
                 <a href="Kisi.html" class="list-group-item list-group-item-action"><i class="fas fa-user-friends"></i> Kisi</a>
                 <a href="Istasyon.html" class="list-group-item list-group-item-action"><i class="fas fa-archway"></i> Istasyon</a>
-                <a href="Gorevli.html" class="list-group-item list-group-item-action"><i class="fas fa-ser-friends"></i> Gorevli</a>
+                <a href="Gorevli.html" class="list-group-item list-group-item-action"><i class="fas fa-user-friends"></i> Gorevli</a>
                 <a href="Zimmet.html" class="list-group-item list-group-item-action"><i class="fas fa-history"></i> Zimmet</a>
                 <a href="Kiralama.html" class="list-group-item list-group-item-action"><i class="fas fa-clock"></i> Kiralama</a>
                 <a href="Ucret.html" class="list-group-item list-group-item-action"><i class="fas fa-coins"></i> Ucret</a>
