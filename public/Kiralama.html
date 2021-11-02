@@ -29,8 +29,7 @@
                 <th>iade Edilen Görevli iD</th>
                 <th>Kiralama Süresi</th>
                 <th>Kira Ücreti</th>
-                
-                
+
                 <th>İşlemler</th>
               </tr>
             </thead>
@@ -49,8 +48,8 @@
                 <select class="form-select" id="ekle_KisiID"></select>
               </div>
               <div class="input-group mb-3">
-                <span class="input-group-text">Bisiklet ID</span>
-                <input type="text" id="ekle_BisikletID" class="form-control" />
+                <span class="input-group-text">Bisiklet</span>
+                <select class="form-select" id="ekle_BisikletID"></select>
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">İstasyon ID</span>
@@ -66,11 +65,7 @@
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">Teslim Saati</span>
-                <input
-                  type="text"
-                  id="ekle_TeslimSaati"
-                  class="form-control"
-                />
+                <input type="text" id="ekle_TeslimSaati" class="form-control" />
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">Teslim AlanGorevli ID</span>
@@ -82,19 +77,11 @@
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">İade Tarihi</span>
-                <input
-                  type="text"
-                  id="ekle_IadeTarihi"
-                  class="form-control"
-                />
+                <input type="text" id="ekle_IadeTarihi" class="form-control" />
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">İade Saati</span>
-                <input
-                  type="text"
-                  id="ekle_IadeSaati"
-                  class="form-control"
-                />
+                <input type="text" id="ekle_IadeSaati" class="form-control" />
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">İade Edilen İstasyon ID</span>
@@ -122,13 +109,8 @@
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">Kira Ücreti</span>
-                <input
-                  type="text"
-                  id="ekle_KiraUcreti"
-                  class="form-control"
-                />
+                <input type="text" id="ekle_KiraUcreti" class="form-control" />
               </div>
-            
 
               <button
                 type="button"
@@ -152,11 +134,19 @@
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">Bisiklet ID</span>
-                <input type="text" id="guncelle_BisikletID" class="form-control" />
+                <input
+                  type="text"
+                  id="guncelle_BisikletID"
+                  class="form-control"
+                />
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">İstasyon ID</span>
-                <input type="text" id="guncelle_IstasyonID" class="form-control" />
+                <input
+                  type="text"
+                  id="guncelle_IstasyonID"
+                  class="form-control"
+                />
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">Teslim Tarihi</span>
@@ -224,13 +214,12 @@
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">Kira Ücreti</span>
-                <input 
+                <input
                   type="text"
                   id="guncelle_KiraUcreti"
                   class="form-control"
                 />
               </div>
-
 
               <button
                 type="button"
@@ -259,7 +248,6 @@
           IadeEdilenGorevliID: $("#ekle_IadeEdilenGorevliID").val(),
           KiralamaSuresi: $("#ekle_KiralamaSuresi").val(),
           KiraUcreti: $("#ekle_KiraUcreti").val(),
-         
         });
         $.ajax({
           type: "POST",
@@ -304,7 +292,7 @@
                     <td>${row.TeslimAlanGorevliID}</td>
                     <td>${row.IadeTarihi}</td>
                     <td>${row.IadeSaati}</td>
-                    <td>${row.IadeEdilenIstasyonID }</td>
+                    <td>${row.IadeEdilenIstasyonID}</td>
                     <td>${row.IadeEdilenGorevliID}</td>
                     <td>${row.KiralamaSuresi}</td>
                     <td>${row.KiraUcreti}</td>
@@ -349,7 +337,7 @@
 
       function KiralamaSet() {
         data = JSON.stringify({
-         KiralamaID: $("#guncelle_KiralamaID").val(),
+          KiralamaID: $("#guncelle_KiralamaID").val(),
           KisiID: $("#guncelle_KisiID").val(),
           BisikletID: $("#guncelle_BisikletID").val(),
           IstasyonID: $("#guncelle_IstasyonID").val(),
@@ -362,7 +350,6 @@
           IadeEdilenGorevliID: $("#guncelle_IadeEdilenGorevliID").val(),
           KiralamaSuresi: $("#guncelle_KiralamaSuresi").val(),
           KiraUcreti: $("#guncelle_KiraUcreti").val(),
-        
         });
         $.ajax({
           type: "PUT",
@@ -394,8 +381,26 @@
         });
       }
 
+      function BisikletleriGetir() {
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:4040/Bisiklet",
+          success: function (res) {
+            for (var i in res) {
+              row = res[i];
+              $("#ekle_BisikletID").append(`
+                <option value="${row.BisikletID}">[${row.CipNo}] ${row.Marka} ${row.Model}</option>
+              `);
+            }
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
       KiralamaGetAll();
       KisileriGetir();
+      BisikletleriGetir();
     </script>
   </body>
 </html>
