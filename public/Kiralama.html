@@ -52,8 +52,8 @@
                 <select class="form-select" id="ekle_BisikletID"></select>
               </div>
               <div class="input-group mb-3">
-                <span class="input-group-text">İstasyon ID</span>
-                <input type="text" id="ekle_IstasyonID" class="form-control" />
+                <span class="input-group-text">İstasyon </span>
+                <select class="form-select" id="ekle_IstasyonID"></select>
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">TeslimTarihi</span>
@@ -398,9 +398,29 @@
         });
       }
 
+      function IstasyonlariGetir() {
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:4040/Istasyon",
+          success: function (res) {
+            for (var i in res) {
+              row = res[i];
+              $("#ekle_IstasyonID").append(`
+              <option value="${row.IstasyonID}">[${row.IstasyonKodu}] ${row.IstasyonAdi} 
+              </option>
+              
+            `);
+            }
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+      
       KiralamaGetAll();
       KisileriGetir();
       BisikletleriGetir();
+      IstasyonlariGetir();
     </script>
   </body>
 </html>
