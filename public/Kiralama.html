@@ -68,12 +68,8 @@
                 <input type="text" id="ekle_TeslimSaati" class="form-control" />
               </div>
               <div class="input-group mb-3">
-                <span class="input-group-text">Teslim AlanGorevli ID</span>
-                <input
-                  type="text"
-                  id="ekle_TeslimAlanGorevliID"
-                  class="form-control"
-                />
+                <span class="input-group-text">Teslim Alan Gorevli </span>
+                <select class="form-select" id="ekle_GorevliID"></select>
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">İade Tarihi</span>
@@ -415,11 +411,32 @@
           contentType: "application/json",
         });
       }
-      
+
+      function GorevlileriGetir() {
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:4040/Gorevli",
+          success: function (res) {
+            for (var i in res) {
+              row = res[i];
+              $("#ekle_GorevliID").append(`
+              <option value="${row.GorevliID}">${row.Adi} ${row.Soyadi} 
+              </option>
+            `);
+            }
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+        
+
       KiralamaGetAll();
       KisileriGetir();
       BisikletleriGetir();
       IstasyonlariGetir();
+      GorevlileriGetir();
     </script>
   </body>
 </html>
