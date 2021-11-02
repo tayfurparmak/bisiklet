@@ -45,8 +45,8 @@
             <div class="card-header">Kiralama Ekle</div>
             <div class="card-body">
               <div class="input-group mb-3">
-                <span class="input-group-text">Kişi ID</span>
-                <input type="text" id="ekle_KisiID" class="form-control" />
+                <span class="input-group-text">Kişi</span>
+                <select class="form-select" id="ekle_KisiID"></select>
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">Bisiklet ID</span>
@@ -377,7 +377,25 @@
         });
       }
 
+      function KisileriGetir() {
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:4040/Kisi",
+          success: function (res) {
+            for (var i in res) {
+              row = res[i];
+              $("#ekle_KisiID").append(`
+                <option value="${row.KisiID}">${row.Adi} ${row.Soyadi}</option>
+              `);
+            }
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
       KiralamaGetAll();
+      KisileriGetir();
     </script>
   </body>
 </html>
